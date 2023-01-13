@@ -1,0 +1,29 @@
+FROM node:16-alpine
+
+RUN mkdir -p /app
+
+WORKDIR /app
+
+COPY package.json /app
+
+RUN yarn install
+
+COPY . /app
+
+RUN yarn build
+
+# USER nextjs
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]
+
+# para crear la imagen:
+# debe estar el docker desktop corriendo
+# en la consola -> docker build -t nextjs-initial . 
+# es una imagen muy pesada mas de 1.5GB
+
+# levantar la imagen:
+# en la consola -> docker run --name=next-app -p 3000:3000 nextjs-initial
+                # nombre para identificarla - puerto de mi puerto al de docker - nombre de la imagen 
+
